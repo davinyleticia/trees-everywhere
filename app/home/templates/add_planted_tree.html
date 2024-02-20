@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Add a Planted Tree</h2>
+<h2  class="text-center" style="padding: 1rem 0">Adicione uma árvore plantada</h2>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">Adicionar árvore </button>
+  <button class="btn btn-success" type="submit">Adicionar árvore </button>
 </form>
 
 {% endblock %}

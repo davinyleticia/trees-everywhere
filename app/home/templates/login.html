@@ -1,13 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
 {% if error %}
-<p>{{ error }}</p>
+<p style="padding: 1rem 0">{{ error }}</p>
 {% endif %}
+<div class="container-sm" style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
+  <h2 class="text-center" style="padding: 1rem 0">Login</h2>
 <form method="post">
   {% csrf_token %}
   <label for="username">Username:</label>
   <input type="text" id="username" name="username">
   <label for="password">Password:</label>
   <input type="password" id="password" name="password">
-  <button type="submit">Login</button>
+  <button class="btn btn-success" type="submit">Login</button>
 </form>
+</div>
 
-<a href="{% url 'register' %}">Criar Usuário</a>
+{% endblock %}

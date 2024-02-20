@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Árvores Plantadas do usuário(a): {{ user.username }}</h2>
+<h2  class="text-center" style="padding: 1rem 0">Árvores Plantadas do usuário(a): {{ user.username }}</h2>
 <ul>
   {% for tree in trees %}
     <li>{{ tree.account }}  - <a href="{% url 'planted_tree_detail' tree.id %}"> {{ tree.tree.name }}</a> - Planted on: {{ tree.planted_at }}</li>

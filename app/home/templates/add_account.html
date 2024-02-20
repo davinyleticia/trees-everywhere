@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h2>Adicionar Conta</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Salvar</button>
-  </form>
+<h2 class="text-center" style="padding: 1rem 0">Adicionar Conta</h2>
+<div>
+  <div class="col">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-success" type="submit">Salvar</button>
+    </form>
+  </div>
+</div>
+
 {% endblock %}

@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Inscrever-se</title>
-</head>
-<body>
-    <h2>Inscrever-se</h2>
+
+{% extends 'base.html' %}
+{% block content %}
+    <h2  class="text-center" style="padding: 1rem 0">Inscrever-se</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Registrar</button>
+        <button class="btn btn-success" type="submit">Registrar</button>
     </form>
-</body>
-</html>
+    {% endblock %}
