@@ -12,7 +12,7 @@
         <nav>
            
             {% if user.is_authenticated %} 
-                usuário(a): {{ user.username }} - 
+                usuário(a): <a href="../profile" >{{ user.username }}</a> - 
                 <a href="{% url 'planted_trees' %}"> Árvores Plantadas</a> | 
                 <a href="{% url 'add_account' %}">Adicionar conta</a> | 
                 <a href="{% url 'add_tree' %}">Adicionar árvore</a> |
@@ -33,7 +33,7 @@
 
     <footer>
         <!-- Incluir rodapé aqui -->
-        <p>&copy; {{ year }} Seu Projeto Django</p>
+        <p>&copy; {{ year }} Projeto de Gerenciamento de Árvores - Teste YouShop</p>
     </footer>
 </body>
 </html>

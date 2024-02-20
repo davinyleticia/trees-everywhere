@@ -1,16 +1,5 @@
 # Projeto de Gerenciamento de Árvores - Teste YouShop
 
-Código para fazer um migrate no banco de dados:
-
-```bash
-sudo docker-compose run web /usr/src/app/manage.py migrate
-```
-Código para criar um super usuário:
-
-```bash
-sudo docker-compose run web /usr/src/app/manage.py createsuperuser
-```
-
 
 ### Desenvolvimento
 
@@ -25,6 +14,18 @@ Usa o servidor de desenvolvimento Django padrão.
     ```
 
     Teste em [http://localhost:8000](http://localhost:8000). A pasta "app" é montada no contêiner e as alterações no código são aplicadas automaticamente.
+
+
+Código para fazer um migrate no banco de dados:
+
+```bash
+sudo docker-compose run web /usr/src/app/manage.py migrate
+```
+Código para criar um super usuário:
+
+```bash
+sudo docker-compose run web /usr/src/app/manage.py createsuperuser
+```
 
 ### Produção
 

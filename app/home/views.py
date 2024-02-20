@@ -7,12 +7,13 @@ from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import PlantedTree, Tree
+from .models import PlantedTree, Tree, Profile
 from .forms import PlantedTreeForm, TreeForm, AccountForm, UserCreateForm
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from .serializers import PlantedTreeSerializer
+
 
 
 # Page Login
@@ -91,6 +92,15 @@ def add_account(request):
     else:
         form = AccountForm()
     return render(request, 'add_account.html', {'form': form})
+
+
+@login_required
+def profile_detail_view(request):
+    
+    # Recupera o perfil associado ao usuário atual
+    profile = get_object_or_404(Profile, user=request.user)
+    
+    return render(request, 'profile_detail.html', {'profile': profile})
 
 # Page Register
 def register(request):

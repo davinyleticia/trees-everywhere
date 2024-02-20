@@ -15,6 +15,7 @@ urlpatterns = [
     path('add-tree/', views.add_tree, name='add_tree'),
     path('add-account/', views.add_account, name='add_account'),
     path('register/', views.register, name='register'),
+    path('profile/', views.profile_detail_view, name='profile-detail'),
     path('logout/', views.logout_view, name='logout'),
     path('api/planted-trees/', views.PlantedTreesListView.as_view(), name='planted-trees-list'),
     path('api/login/', views.LoginView.as_view(), name='login')

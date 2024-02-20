@@ -83,9 +83,9 @@ WSGI_APPLICATION = "core.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": os.environ.get("SQL_ENGINE"),
-        "NAME": os.environ.get("SQL_DATABASE"),
-        "USER": os.environ.get("SQL_USER", "user"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD"),
+        "NAME": os.environ.get("SQL_DATABASE", "youshop_admin_dev"),
+        "USER": os.environ.get("SQL_USER", "youshop_admin"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "root1234"),
         "HOST": os.environ.get("SQL_HOST"),
         "PORT": os.environ.get("SQL_PORT"),
     }
