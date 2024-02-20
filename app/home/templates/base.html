@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste YouShop</title>
+    <!-- Incluir CSS, favicon e outros metadados aqui -->
+
+    {% block extrahead %}{% endblock %}
+</head>
+<body>
+    <header>
+        <nav>
+           
+            {% if user.is_authenticated %} 
+                usuário(a): {{ user.username }} - 
+                <a href="{% url 'planted_trees' %}"> Árvores Plantadas</a> | 
+                <a href="{% url 'add_account' %}">Adicionar conta</a> | 
+                <a href="{% url 'add_tree' %}">Adicionar árvore</a> |
+                <a href="{% url 'add_planted_tree' %}">Adicionar árvore plantada</a> |
+                <a href="{% url 'logout' %}">Sair</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+            <!-- Adicionar mais navegação se necessário -->
+        </nav>
+    </header>
+
+    <main>
+        <!-- Este bloco será sobrescrito pelo conteúdo de outros templates -->
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- Incluir rodapé aqui -->
+        <p>&copy; {{ year }} Seu Projeto Django</p>
+    </footer>
+</body>
+</html>

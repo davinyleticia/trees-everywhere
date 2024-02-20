@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ tree.tree.name }}</h2>
+<p>Scientific Name: {{ tree.tree.scientific_name }}</p>
+<p>Age: {{ tree.age }}</p>
+<p>Planted At: {{ tree.planted_at }}</p>
+<p>Latitude: {{ tree.latitude }}</p>
+<p>Longitude: {{ tree.longitude }}</p>
+{% endblock %}
