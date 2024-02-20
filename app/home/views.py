@@ -15,6 +15,7 @@ from rest_framework.authentication import TokenAuthentication
 from .serializers import PlantedTreeSerializer
 
 
+# Page Login
 def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -27,17 +28,20 @@ def user_login(request):
             return render(request, 'login.html', {'error': 'nome de usuário ou senha inválidos.'})
     else:
         return render(request, 'login.html')
-
+    
+# Page Planted Trees
 @login_required
 def planted_trees(request):
     trees = PlantedTree.objects.filter(user=request.user)
     return render(request, 'planted_trees.html', {'trees': trees})
 
+# Page Planted Tree Detail
 @login_required
 def planted_tree_detail(request, tree_id):
     tree = get_object_or_404(PlantedTree, id=tree_id, user=request.user)
     return render(request, 'planted_tree_detail.html', {'tree': tree})
 
+# Page Add Planted Tree
 @login_required
 def add_planted_tree(request):
     if request.method == 'POST':
@@ -51,60 +55,61 @@ def add_planted_tree(request):
         form = PlantedTreeForm()
     return render(request, 'add_planted_tree.html', {'form': form})
 
+# Page Account Trees
 @login_required
 def account_trees(request):
-    # Obter todas as PlantedTrees que estão associadas ao usuário logado.
+    
     planted_trees = PlantedTree.objects.filter(user=request.user).select_related('account').distinct()
-    # Cria um conjunto de contas únicas dessas árvores plantadas.
+    
     accounts = {tree.account for tree in planted_trees}
     
-    # Agora, se você quer todas as árvores plantadas nessas contas, faça outra consulta.
     all_trees_in_accounts = PlantedTree.objects.filter(account__in=accounts).distinct()
     
     return render(request, 'account_trees.html', {'planted_trees': all_trees_in_accounts})
 
 
-
+# Page Add Tree
 @login_required
 def add_tree(request):
     if request.method == 'POST':
         form = TreeForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('planted_trees')  # Substitua por sua URL de listagem de árvores
+            return redirect('planted_trees')
     else:
         form = TreeForm()
     return render(request, 'add_tree.html', {'form': form})
 
+# Page Add Account
 @login_required
 def add_account(request):
     if request.method == 'POST':
         form = AccountForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('planted_trees')  # Substitua por sua URL de listagem de contas
+            return redirect('planted_trees') 
     else:
         form = AccountForm()
     return render(request, 'add_account.html', {'form': form})
 
-
+# Page Register
 def register(request):
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  # Log the user in
-            return redirect('/')  # Redirect to a desired page
+            login(request, user)
+            return redirect('/')  
     else:
         form = UserCreateForm()
     return render(request, 'register.html', {'form': form})
 
+# Logout
 def logout_view(request):
     logout(request)
-    # Redireciona para a página de login ou para a home page após o logout
-    return redirect('/')  # Substitua 'login' pelo nome da URL para a qual você quer redirecionar
+    return redirect('/')  
 
-
+# API Planted Trees List
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
         username = request.data.get("username")
@@ -116,6 +121,7 @@ class LoginView(APIView):
         else:
             return Response({"error": "Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
 
+# API Planted Trees List
 class PlantedTreesListView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]

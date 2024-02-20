@@ -6,8 +6,8 @@ class PlantedTreeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PlantedTree
-        fields = ['id', 'longitude', 'longitude', 'user_name']  # Add other fields as necessary
+        fields = ['id', 'longitude', 'longitude', 'user_name']
 
     def get_user_name(self, obj):
-        # Retorna o nome do usuário associado à árvore plantada
+
         return obj.user.username if obj.user else None
