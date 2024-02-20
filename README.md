@@ -1,4 +1,4 @@
-# Projeto Teste YouShop
+# Projeto de Gerenciamento de Árvores - Teste YouShop
 
 Código para fazer um migrate no banco de dados:
 
