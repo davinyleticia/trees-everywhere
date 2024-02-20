@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Árvores Plantadas nas Contas</h2>
+<ul>
+  {% for tree in planted_trees %}
+    <li>{{ tree.tree.name }} - Plantada em {{ tree.planted_at }} na conta {{ tree.account.name }}</li>
+  {% empty %}
+    <li>Nenhuma árvore plantada nas contas encontrada.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

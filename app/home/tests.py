@@ -32,7 +32,15 @@ class TreePlantingTestCase(TestCase):
         self.assertContains(response, "Árvore 1")
         self.assertNotContains(response, "Árvore 2")
         
-        
+    # def test_access_other_user_tree_list(self):
+    #     self.client.login(username='user1', password='user1password')
+    #     user2 = User.objects.get(username='user2')
+    #     response = self.client.get(reverse('planted_trees', args=[user2.id]))
+    #     self.assertEqual(response.status_code, 403)
+    
+    
+    
+    
     def test_account_tree_list_template(self):
         self.client.login(username='user1', password='user1password')
         response = self.client.get('/account-trees/')
@@ -50,10 +58,21 @@ class TreePlantingTestCase(TestCase):
         user.plant_tree(tree, latitude, longitude, age)
         self.assertTrue(PlantedTree.objects.filter(user=user, latitude=Decimal(latitude), longitude=Decimal(longitude)).exists())
 
-    def test_plant_trees_method(self):
+    def test_plant_tree_method(self):
         user = User.objects.get(username="user1")
         tree = Tree.objects.first()
+        account = Account.objects.first()  
         age = 5
-        tree_locations = [(tree, ('50.000000', '-80.000000'))]
-        user.plant_trees(tree_locations)
-        self.assertTrue(PlantedTree.objects.filter(user=user, latitude=Decimal('50.000000'), longitude=Decimal('-80.000000')).exists())
+        latitude = '40.000000'
+        longitude = '-70.000000'
+
+        user.plant_tree(tree, latitude, longitude, age, account)
+
+        self.assertTrue(PlantedTree.objects.filter(
+            user=user,
+            tree=tree,
+            latitude=Decimal(latitude),
+            longitude=Decimal(longitude),
+            age=age,
+            account=account
+        ).exists())

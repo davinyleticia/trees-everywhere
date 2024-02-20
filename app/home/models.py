@@ -48,3 +48,15 @@ User.add_to_class('plant_trees', lambda self, tree_locations:
                       user=self, tree=tree_location[0],
                       latitude=Decimal(tree_location[1][0]), longitude=Decimal(tree_location[1][1])
                   ) for tree_location in tree_locations])
+
+
+User.add_to_class('plant_tree', lambda self, tree, latitude, longitude, age, account: 
+    PlantedTree.objects.create(
+        user=self,
+        tree=tree,
+        latitude=Decimal(latitude),
+        longitude=Decimal(longitude),
+        age=age,
+        account=account
+    )
+)
