@@ -4,6 +4,8 @@
 {% if error %}
 <p style="padding: 1rem 0">{{ error }}</p>
 {% endif %}
+
+{% if not user.is_authenticated %} 
 <div class="container-sm" style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
   <h2 class="text-center" style="padding: 1rem 0">Login</h2>
 <form method="post">
@@ -15,5 +17,8 @@
   <button class="btn btn-success" type="submit">Login</button>
 </form>
 </div>
-
+{% else %}
+<div class="container-sm" style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
+  <h2 class="text-center" style="padding: 1rem 0">Você já está logado</h2>
+{% endif %}
 {% endblock %}
