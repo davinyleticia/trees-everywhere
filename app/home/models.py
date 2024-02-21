@@ -5,10 +5,10 @@ from decimal import Decimal
 
 # Template for account, which can group multiple users
 class Account(models.Model):
-    name = models.CharField(max_length=255)
-    created = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=True)
-    users = models.ManyToManyField(User, related_name='accounts')
+    name = models.CharField(max_length=255, verbose_name="Nome")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="criado em")
+    active = models.BooleanField(default=True, verbose_name="ativo")
+    users = models.ManyToManyField(User, related_name='accounts', verbose_name="usuários")
 
     def __str__(self):
         return self.name
@@ -16,15 +16,15 @@ class Account(models.Model):
 
 # Template for user profile
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    about = models.TextField(blank=True)
-    joined = models.DateTimeField(auto_now_add=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="usuário")
+    about = models.TextField(blank=True, verbose_name="sobre")
+    joined = models.DateTimeField(auto_now_add=True, verbose_name="entrou em")
 
 
 # Template for tree
 class Tree(models.Model):
-    name = models.CharField(max_length=255)
-    scientific_name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, verbose_name="Nome")
+    scientific_name = models.CharField(max_length=255, verbose_name="Nome científico")
 
     def __str__(self):
         return self.name
@@ -32,13 +32,13 @@ class Tree(models.Model):
 
 # Template for planted trees
 class PlantedTree(models.Model):
-    age = models.IntegerField()
-    planted_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    tree = models.ForeignKey(Tree, on_delete=models.CASCADE)
-    account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    age = models.IntegerField(default=0, verbose_name="idade")
+    planted_at = models.DateTimeField(auto_now_add=True, verbose_name="plantado em")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="usuário")
+    tree = models.ForeignKey(Tree, on_delete=models.CASCADE, verbose_name="árvore")
+    account = models.ForeignKey(Account, on_delete=models.CASCADE,  verbose_name="conta")
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, verbose_name="latitude")
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, verbose_name="longitude")
 
 
 # Adding methods to the User model
