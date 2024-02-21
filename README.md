@@ -56,16 +56,3 @@ Código para criar um super usuário:
 ```bash
 sudo docker-compose run web /usr/src/app/manage.py createsuperuser
 ```
-
-### Produção
-
-Usa gunicorn + nginx.
-
-1. Renomeie *.env.prod-sample* para *.env.prod* e *.env.prod.db-sample* para *.env.prod.db*. Atualize as variáveis ​​de ambiente.
-1. Construa as imagens e execute os contêineres:
-
-    ```sh
-    $ docker-compose -f docker-compose.prod.yml up -d --build
-    ```
-
-    Teste em [http://localhost:1337](http://localhost:1337). Nenhuma pasta montada. Para aplicar alterações, a imagem deve ser reconstruída.
