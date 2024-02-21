@@ -1,6 +1,37 @@
 # Projeto de Gerenciamento de Árvores - Teste YouShop
 
 
+## API 
+
+Obter token
+
+```bash
+curl --request POST \
+  --url http://127.0.0.1:8000/api/login/ \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/8.4.5' \
+  --data '{
+	"username": "root",
+	"password": "132"
+}'
+```
+
+A lista
+
+```bash
+curl --request GET \
+  --url http://127.0.0.1:8000/api/planted-trees/ \
+  --header 'Authorization: Token 558c78dedd0e32b3ef2018160e8b652e91448138' \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/8.4.5'
+```
+
+---
+
+
+
+## Instalação
+
 ### Desenvolvimento
 
 Usa o servidor de desenvolvimento Django padrão.
