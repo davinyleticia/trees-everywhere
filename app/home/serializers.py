@@ -7,7 +7,7 @@ class PlantedTreeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PlantedTree
-        fields = ['id', 'longitude', 'longitude', 'user_name']
+        fields = ['id', 'longitude', 'latitude', 'user_name']
 
     def get_user_name(self, obj):
 
