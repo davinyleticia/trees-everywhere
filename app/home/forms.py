@@ -3,20 +3,24 @@ from .models import PlantedTree, Tree, Account, Profile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+
 class PlantedTreeForm(forms.ModelForm):
     class Meta:
         model = PlantedTree
         fields = ['tree', 'age', 'latitude', 'longitude', 'account']
+
 
 class TreeForm(forms.ModelForm):
     class Meta:
         model = Tree
         fields = ['name', 'scientific_name']
 
+
 class AccountForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = ['name', 'active']
+
 
 class UserCreateForm(UserCreationForm):
     about = forms.CharField(required=False, widget=forms.Textarea)

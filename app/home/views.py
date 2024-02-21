@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -13,7 +12,6 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from .serializers import PlantedTreeSerializer
-
 
 
 # Page Login
@@ -29,18 +27,21 @@ def user_login(request):
             return render(request, 'login.html', {'error': 'nome de usuário ou senha inválidos.'})
     else:
         return render(request, 'login.html')
-    
+
+
 # Page Planted Trees
 @login_required
 def planted_trees(request):
     trees = PlantedTree.objects.filter(user=request.user)
     return render(request, 'planted_trees.html', {'trees': trees})
 
+
 # Page Planted Tree Detail
 @login_required
 def planted_tree_detail(request, tree_id):
     tree = get_object_or_404(PlantedTree, id=tree_id, user=request.user)
     return render(request, 'planted_tree_detail.html', {'tree': tree})
+
 
 # Page Add Planted Tree
 @login_required
@@ -56,16 +57,13 @@ def add_planted_tree(request):
         form = PlantedTreeForm()
     return render(request, 'add_planted_tree.html', {'form': form})
 
+
 # Page Account Trees
 @login_required
 def account_trees(request):
-    
     planted_trees = PlantedTree.objects.filter(user=request.user).select_related('account').distinct()
-    
     accounts = {tree.account for tree in planted_trees}
-    
     all_trees_in_accounts = PlantedTree.objects.filter(account__in=accounts).distinct()
-    
     return render(request, 'account_trees.html', {'planted_trees': all_trees_in_accounts})
 
 
@@ -81,6 +79,7 @@ def add_tree(request):
         form = TreeForm()
     return render(request, 'add_tree.html', {'form': form})
 
+
 # Page Add Account
 @login_required
 def add_account(request):
@@ -88,7 +87,7 @@ def add_account(request):
         form = AccountForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('planted_trees') 
+            return redirect('planted_trees')
     else:
         form = AccountForm()
     return render(request, 'add_account.html', {'form': form})
@@ -96,11 +95,10 @@ def add_account(request):
 
 @login_required
 def profile_detail_view(request):
-    
     # Recupera o perfil associado ao usuário atual
     profile = get_object_or_404(Profile, user=request.user)
-    
     return render(request, 'profile_detail.html', {'profile': profile})
+
 
 # Page Register
 def register(request):
@@ -109,15 +107,17 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('/')  
+            return redirect('/')
     else:
         form = UserCreateForm()
     return render(request, 'register.html', {'form': form})
 
+
 # Logout
 def logout_view(request):
     logout(request)
-    return redirect('/')  
+    return redirect('/')
+
 
 # API Planted Trees List
 class LoginView(APIView):
@@ -131,6 +131,7 @@ class LoginView(APIView):
         else:
             return Response({"error": "Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
 
+
 # API Planted Trees List
 class PlantedTreesListView(APIView):
     permission_classes = [IsAuthenticated]
@@ -141,5 +142,3 @@ class PlantedTreesListView(APIView):
         trees_planted_by_user = PlantedTree.objects.filter(user=user)
         serializer = PlantedTreeSerializer(trees_planted_by_user, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    
-

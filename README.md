@@ -29,7 +29,6 @@ curl --request GET \
 ---
 
 
-
 ## Instalação
 
 ### Desenvolvimento

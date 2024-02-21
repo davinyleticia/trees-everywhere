@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  web:
+  web_prod:
     build:
       context: ./app
       dockerfile: Dockerfile.prod
@@ -14,8 +14,8 @@ services:
     env_file:
       - ./.env.prod
     depends_on:
-      - db
-  db:
+      - db_prod
+  db_prod:
     image: postgres:15
     volumes:
       - postgres_data:/var/lib/postgresql/data/
@@ -29,7 +29,7 @@ services:
     ports:
       - 1337:80
     depends_on:
-      - web
+      - web_prod
 
 volumes:
   postgres_data:
