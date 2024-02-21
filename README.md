@@ -27,6 +27,13 @@ Código para criar um super usuário:
 sudo docker-compose run web /usr/src/app/manage.py createsuperuser
 ```
 
+## Teste
+
+segue o comando de teste
+
+```bash
+sudo docker-compose run web /usr/src/app/manage.py test
+```
 
 ## web
 Para rodar via web:
