@@ -28,12 +28,6 @@ class TreePlantingTestCase(TestCase):
         self.assertContains(response, "Árvore 1")
         self.assertNotContains(response, "Árvore 2")
 
-    # def test_access_other_user_tree_list(self):
-    #     self.client.login(username='user1', password='user1password')
-    #     user2 = User.objects.get(username='user2')
-    #     response = self.client.get(reverse('planted_trees', args=[user2.id]))
-    #     self.assertEqual(response.status_code, 403)
-
     def test_account_tree_list_template(self):
         self.client.login(username='user1', password='user1password')
         response = self.client.get('/account-trees/')
