@@ -31,13 +31,11 @@ curl --request GET \
 
 ## Instalação
 
-### Desenvolvimento
-
 Usa o servidor de desenvolvimento Django padrão.
 
 1. Renomeie *.env.dev-sample* para *.env.dev*.
-1. Atualize as variáveis ​​de ambiente nos arquivos *docker-compose.yml* e *.env.dev*.
-1. Construa as imagens e execute os contêineres:
+2. Atualize as variáveis ​​de ambiente nos arquivos *docker-compose.yml* e *.env.dev*.
+3. Construa as imagens e execute os contêineres:
 
     ```sh
     $ docker-compose up -d --build
